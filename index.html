@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="shortcut icon" type="x-con" href="Images/PR Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div class="login-container" >
+
+    <div class="logo">
+        <img src="Images/PR Grey n gree 2.png" alt="">
+    </div>
+
+
+    <div class="inputplace">
+        
+        <div class="username">
+            <div class="useri">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            </i><input type="text" id="username" placeholder="username" required> 
+        </div>
+        
+        <div class="password">
+            <div class="locki">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+            </div>
+            </i><input type="password" id="password" placeholder="Password***" required>
+        </div>
+
+        <div id="error-message" style="color: red; margin-top: 10px;"></div>
+        
+    </div>
+
+    <div class="login">
+        <button onclick="login()"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+    </div>
+</div>
+<div id="popup-message" class="popup">
+    <span class="popuptext" id="popup-text">Wrong password. Try again.</span>
+</div>
+
+
+<script>
+    function showPopupMessage() {
+    var popup = document.getElementById("popup-message");
+    popup.classList.add("show");
+    setTimeout(function() {
+        popup.classList.remove("show");
+    }, 3000); // Hide the pop-up message after 3 seconds
+}
+
+    function login() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var errorMessage = document.getElementById('error-message');
+        
+
+        if (username === 'Admin' && password === '123456') {
+            errorMessage.textContent = '';
+            localStorage.setItem("hideHistoryButton", "false"); // Set flag to show history button
+            localStorage.setItem("hidestatus", "false"); // Set flag to show history button
+            localStorage.setItem("hidestudio", "true"); // Set flag to show history button
+            localStorage.setItem("hideworkshop", "true"); // Set flag to show history button
+            localStorage.setItem("hideaccounts", "true"); // Set flag to show history button
+            localStorage.setItem("hidewarehouse", "true"); // Set flag to show history button
+            localStorage.setItem("hideprojectlist", "false"); // Set flag to show history button
+            window.location.href = 'home.php';
+        }
+        
+        else if (username === 'Studio' && password === '123456') {
+            errorMessage.textContent = '';
+            localStorage.setItem("hideHistoryButton", "true"); // Set flag to hide history button
+            localStorage.setItem("hidestatus", "true"); // Set flag to hide history button
+            localStorage.setItem("hidestudio", "false"); // Set flag to hide history button
+            localStorage.setItem("hideworkshop", "true"); // Set flag to hide history button
+            localStorage.setItem("hideaccounts", "true"); // Set flag to hide history button
+            localStorage.setItem("hidewarehouse", "true"); // Set flag to hide history button
+            localStorage.setItem("hideprojectlist", "true"); // Set flag to hide history button
+            window.location.href = "home.php";
+        } 
+        
+        else if (username === 'Accounts' && password === '123456') {
+            errorMessage.textContent = '';
+            localStorage.setItem("hideHistoryButton", "true"); // Set flag to hide history button
+            localStorage.setItem("hidestatus", "true"); // Set flag to hide history button
+            localStorage.setItem("hidestudio", "true"); // Set flag to hide history button
+            localStorage.setItem("hideworkshop", "true"); // Set flag to hide history button
+            localStorage.setItem("hideaccounts", "false"); // Set flag to hide history button
+            localStorage.setItem("hidewarehouse", "true"); // Set flag to hide history button
+            localStorage.setItem("hideprojectlist", "true"); // Set flag to hide history button
+            window.location.href = "home.php";
+        }
+        
+        else if (username === 'Workshop' && password === '123456') {
+            errorMessage.textContent = '';
+            localStorage.setItem("hideHistoryButton", "true"); // Set flag to hide history button
+            localStorage.setItem("hidestatus", "true"); // Set flag to hide history button
+            localStorage.setItem("hidestudio", "true"); // Set flag to hide history button
+            localStorage.setItem("hideworkshop", "false"); // Set flag to hide history button
+            localStorage.setItem("hideaccounts", "true"); // Set flag to hide history button
+            localStorage.setItem("hidewarehouse", "true"); // Set flag to hide history button
+            localStorage.setItem("hideprojectlist", "true"); // Set flag to hide history button
+            window.location.href = "home.php";
+        }
+
+        else if (username === 'Sales' && password === '123456') {
+            errorMessage.textContent = '';
+            localStorage.setItem("hideHistoryButton", "false"); // Set flag to hide history button
+            localStorage.setItem("hidestatus", "true"); // Set flag to hide history button
+            localStorage.setItem("hidestudio", "true"); // Set flag to hide history button
+            localStorage.setItem("hideworkshop", "true"); // Set flag to hide history button
+            localStorage.setItem("hideaccounts", "true"); // Set flag to hide history button
+            localStorage.setItem("hidewarehouse", "false"); // Set flag to hide history button
+            localStorage.setItem("hideprojectlist", "true"); // Set flag to hide history button
+            window.location.href = "home.php";
+        }
+
+        else {
+            showPopupMessage();
+        }
+
+        
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="studio.css">
+    <link rel="shortcut icon" type="x-con" href="Images/PR Logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.js">
+    <title>Studio Department</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+    <div class="left">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <i class="fa fa-bell" aria-hidden="true"></i>
+        <i class="fa fa-cog" aria-hidden="true"></i>
+    </div>
+    
+    <div class="sidenav">
+        <div class="logo">
+            <img src="Images/PR Logo.png" alt="">
+        </div>
+        <nav>
+            <ul id="links">
+                <li><a href="home.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                <!--<li><a href="tasks.css"><i class="fa fa-check" aria-hidden="true"></i> Completed Tasks</a></li>-->
+                <div class="linkssss" id="studio" style="display:{{hidestudio}}">
+                    <li><a href="studio.html"><i class="fa fa-building" aria-hidden="true"></i> Studio</a></li>
+                </div>
+                <!-- <div class="logout">
+                    <a href="#" onclick="logout()"><i class="fas fa-door-open    "></i>Exit</a>
+                    </div> -->
+            </ul>
+        </nav>   
+    </div>
+
+    <div class="imgclick">
+        <img src="Images/menu2.png" class="menu-icon" 
+        onclick="toggleMobileMenu()">
+    </div>
+
+    <div class="contents">
+        
+        <div class="pname">
+            <Strong>PROJECT</Strong> NAME:
+        </div>
+
+        <div id="details">
+
+        </div>
+
+        <div class="status">
+            PROJECT STATUS
+        </div>
+        
+        <div class="containerr">
+    
+            <div class="hide">
+                <label>
+                    <input type="checkbox" id="checkbox1"> Sales
+                </label>
+        
+                <label>
+                    <input type="checkbox" id="checkbox2"> Workshop
+                </label>
+        
+                
+        
+                <label>
+                    <input type="checkbox" id="checkbox4"> Sent to Workshop
+                </label>
+        
+                
+            </div>
+            
+            <div class="percentage-line">
+                <div class="green-fill"></div>
+            </div>
+
+            <div class="per">
+                <p id="percentage"> 0%</p>
+            </div>
+    
+        </div>
+
+
+        <div class="bottombox">
+
+            <div class="pr">
+                Click Below <strong>If Submitted</strong> 
+                <div class="acc">
+                    <label>
+                        <!--<input type="checkbox" id="checkbox3"> Sent to Workshop-->
+                        <input type="checkbox" id="checkbox3"> Studio Done
+                    </label>
+                </div>
+            </div>
+
+            <div class="imgclick2">
+                <img src="Images/menu2.png" class="menu-icon2" 
+                onclick="toggleMobileMenu2()">
+            </div>
+
+            <!--  History Code................................................... -->
+            <div class="viewpjects">
+                <a href="#" onclick="togglePopup()">OTHER PROJECTS</a>
+            </div>
+             <!-- History Code................................................... -->
+
+        </div>
+
+        
+
+    </div>
+
+    <!-- Popup box -->
+
+    <div class="popup" id="popupContainer">
+
+        <div id="historyPanels">
+            <!-- Previous titles will be appended here -->
+        </div>
+
+    </div>
+
+    <script>
+
+//For the Menu icon.................................................................
+
+    function toggleMobileMenu() {
+        var mobileMenu = document.querySelector(".sidenav");
+        mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
+    }
+
+//For the History Pannel.............................................................
+    function toggleMobileMenu2() {
+         var mobileMenu = document.querySelector(".popup");
+         mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
+    }
+
+//For the Name.......................................................................
+    
+        window.onload = function() {
+    var name = localStorage.getItem("name");
+    var surname = localStorage.getItem("surname");
+    
+    var detailsDiv = document.getElementById("details");
+    detailsDiv.textContent = " " + name ;
+    };
+
+    // document.getElementById('checkbox3').addEventListener('change', function() {
+    //         localStorage.setItem('studioStatus', this.checked ? 'Studio Done' : '');
+    //     });
+        
+
+
+        window.onload = function() {
+            var surname = localStorage.getItem("surname");
+            var detailsDiv = document.getElementById("details");
+            detailsDiv.textContent = "" + surname;
+        };
+
+    //The History Code.........................................................................
+    
+    window.onload = function() {
+      let details = localStorage.getItem('surname');
+      if (!details) {
+        details = 'Default Page Title'; // Set a default title if none is found
+        localStorage.setItem('surname', surname);
+      }
+      const tdetails = document.getElementById('details');
+      details.textContent = details;
+
+      // Update checkbox states
+      updateCheckboxStates(details);
+
+      // Display history panel
+      displayHistoryPanels();
+    };
+
+    function updateCheckboxStates(details) {
+      const checkbox3State = localStorage.getItem(details + '_checkbox3');
+      document.getElementById('checkbox3').checked = checkbox3State === 'true';
+    }
+
+    //Examples..................................................
+
+    //  document.getElementById('checkbox3').addEventListener('change', function() {
+    //         localStorage.setItem('studioStatus', this.checked ? 'Studio Done' : '');
+    //     });
+
+        // Initialize checkbox state on page load
+        window.onload = function() {
+            var studioStatus = localStorage.getItem('studioStatus');
+            if (studioStatus === 'Studio Done') {
+                document.getElementById('checkbox3').checked = true;
+            }
+        };
+    //Examples..................................................
+
+
+//Keeps the Checkbox Ticked even when refleshed............................................
+    // function updateStatus(checkboxId) {
+    //   const details = localStorage.getItem('details');
+    //   const checkbox = document.getElementById(checkboxId);
+    //   localStorage.setItem(details + '_' + checkboxId, checkbox.checked);
+    // }
+    
+//Displays History.........................................................................    
+    function displayHistoryPanels() {
+      const historyPanels = document.getElementById('historyPanels');
+      historyPanels.innerHTML = ''; // Clear previous entries
+
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key.includes('_checkbox') && key !== 'details') {
+          const title = localStorage.getItem(key);
+          const historyEntry = document.createElement('p');
+          historyEntry.textContent = title;
+          historyEntry.addEventListener('click', function() {
+            displayRecord(key);
+          });
+          historyPanels.appendChild(historyEntry);
+        }
+      }
+    }
+    
+    function displayRecord(titleKey) {
+  const details = localStorage.getItem(titleKey);
+  const titleDisplay = document.getElementById('details');
+  titleDisplay.textContent = details;
+
+  // Update the current title to the selected title
+  localStorage.setItem('details', details);
+
+  // Update checkbox states for the selected title
+  updateCheckboxStates(details);
+}
+    
+
+
+
+
+
+// Function to save the checkbox state to localStorage
+function updateStatus(checkboxId) {
+    const details = localStorage.getItem('details');
+    const checkbox = document.getElementById(checkboxId);
+    localStorage.setItem(details + '_' + checkboxId, checkbox.checked);
+}
+
+// // Function to display a record with checkbox states
+// function displayRecord(titleKey) {
+//     const details = localStorage.getItem(titleKey);
+//     const titleDisplay = document.getElementById('details');
+//     titleDisplay.textContent = details;
+
+//     // Update the current title to the selected title
+//     localStorage.setItem('details', details);
+
+//     // Update checkbox states for the selected title
+//     updateCheckboxStates(details);
+// }
+
+// Function to update checkbox states
+// function updateCheckboxStates(details) {
+//     const checkbox3State = localStorage.getItem(details + '_checkbox3');
+//     document.getElementById('checkbox3').checked = checkbox3State === 'true';
+// }
+
+// // Event listener for checkbox changes
+// document.getElementById('checkbox3').addEventListener('change', function() {
+//     localStorage.setItem('studioStatus', this.checked ? 'Studio Done' : '');
+
+//     // Save checkbox state to localStorage
+//     updateStatus('checkbox3');
+// });
+
+// // Initialize checkbox states on page load
+// window.onload = function() {
+//     const details = localStorage.getItem('details');
+//     if (details) {
+//         updateCheckboxStates(details);
+//     }
+// };
+
+    
+    
+    
+    
+    
+    
+    //     // Function to toggle the visibility of the popup
+    //     function togglePopup() {
+    //         var popup = document.getElementById("popupContainer");
+    //         popup.style.display = (popup.style.display === "block") ? "none" : "block";
+    //         if (popup.style.display === "block") {
+    //             document.body.addEventListener('click', closePopupOutside);
+    //         } else {
+    //             document.body.removeEventListener('click', closePopupOutside);
+    //         }
+    //     }
+    
+    //     // Function to toggle the mobile side navigation
+    //     function toggleMobileMenu() {
+    //         var mobileMenu = document.querySelector(".sidenav");
+    //         mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
+    //     }
+    //     function toggleMobileMenu2() {
+    //         var mobileMenu = document.querySelector(".popup");
+    //         mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
+    //     }
+    
+    //     window.onload = function() {
+    //         var name = localStorage.getItem("name");
+    //         var surname = localStorage.getItem("surname");
+            
+    //         var detailsDiv = document.getElementById("details");
+    //         detailsDiv.textContent = " " + name ;
+    //     };
+    
+    //     document.getElementById('checkbox3').addEventListener('change', function() {
+    //         localStorage.setItem('studioStatus', this.checked ? 'Studio Done' : '');
+
+    //         // Display history panel
+    //     displayHistoryPanels();
+    //     });
+
+    //     function displayHistoryPanels() {
+    //   const historyPanels = document.getElementById('historyPanels');
+    //   historyPanels.innerHTML = ''; // Clear previous entries
+
+    //   for (let i = 0; i < localStorage.length; i++) {
+    //     const key = localStorage.key(i);
+    //     if (!key.includes('_checkbox') && key !== 'pageTitle') {
+    //       const title = localStorage.getItem(key);
+    //       const historyEntry = document.createElement('p');
+    //       historyEntry.textContent = title;
+    //       historyEntry.addEventListener('click', function() {
+    //         displayRecord(key);
+    //       });
+    //       historyPanels.appendChild(historyEntry);
+    //     }
+    //   }
+    // }
+
+    //     // .........................................................................................
+
+    // //     function updateStatus() {
+    // //   const checkbox3 = document.getElementById('checkbox3');
+    // //   localStorage.setItem('pageA_checkbox3', checkbox3.checked);
+    // //   checkAndUpdateHistory();
+
+    // //   // Dispatch event when checkbox is changed
+    // //   const checkboxChangeEvent = new Event('checkboxChange');
+    // //   document.dispatchEvent(checkboxChangeEvent);
+    // // }
+
+    // // function displayHistoryPanels() {
+    // //   const historyPanels = document.getElementById('historyPanels');
+    // //   historyPanels.innerHTML = ''; // Clear previous entries
+
+    // //   for (let i = 0; i < localStorage.length; i++) {
+    // //     const key = localStorage.key(i);
+    // //     if (!key.includes('_checkbox') && key !== 'pageTitle') {
+    // //       const title = localStorage.getItem(key);
+    // //       const historyEntry = document.createElement('p');
+    // //       historyEntry.textContent = title;
+    // //       historyEntry.addEventListener('click', function() {
+    // //         displayRecord(key);
+    // //       });
+    // //       historyPanels.appendChild(historyEntry);
+    // //     }
+    // //   }
+    // // }
+
+    // function checkAndUpdateHistory() {
+    //   const checkbox3 = document.getElementById('checkbox3');
+    //   if (checkbox3.checked) {
+    //     // Both checkboxes are checked, remove only the currently displayed title entry from history
+    //     removeDisplayedTitleFromHistory();
+    //   }
+    // }
+
+    // // function removeDisplayedTitleFromHistory() {
+    // //   const displayedTitle = document.getElementById('titleDisplay222').textContent;
+    // //   const displayedKey = 'previousTitle_' + displayedTitle.replace(/\s+/g, '_');
+    // //   localStorage.removeItem(displayedKey);
+    // //   localStorage.removeItem(displayedKey + '_checkbox3');
+    // //   displayHistoryPanels(); // Update the history panel after removal
+    // // }
+    //     // .........................................................................................
+    
+    //     window.onload = function() {
+    //         var surname = localStorage.getItem("surname");
+    //         var detailsDiv = document.getElementById("details");
+    //         detailsDiv.textContent = "" + surname;
+    //     };
+    
+    //     //.....................................................................................
+    
+    
+    //     function logout() {
+    //         var logoutPopup = confirm("Do you want to log out?");
+    //         if (logoutPopup) {
+    //             // Perform logout action here
+    //             // For example: redirect to logout page
+    //             window.location.href = "index.html";
+    //         }
+    //     }
+    
+    //     // Function to close the popup when clicking outside of it
+    //     function closePopupOutside(event) {
+    //         var popup = document.getElementById("popupContainer");
+    //         var target = event.target;
+    //         if (!popup.contains(target) && target !== document.querySelector('.viewpjects a')) {
+    //             popup.style.display = "none";
+    //             document.body.removeEventListener('click', closePopupOutside);
+    //         }
+    //     }
+    
+    //     function closePopup() {
+    //         var popup = document.getElementById("popupContainer");
+    //         popup.style.display = "none";
+    //         document.body.removeEventListener('click', closePopupOutside);
+    //     }
+    
+    //     // Add this event listener to show the popup when clicking OTHER PROJECTS link
+    //     document.querySelector('.viewpjects a').addEventListener('click', togglePopup);
+
+
+
+
+    //     // WORK ON THIS CODE............................................................................
+
+
+    //     window.onload = function() {
+    //   const pageTitle = localStorage.getItem('pageTitle');
+    //   const titleDisplay222 = document.getElementById('titleDisplay222');
+    //   if (pageTitle) {
+    //     titleDisplay222.textContent = pageTitle;
+    //   }
+
+    //   const checkbox1State = localStorage.getItem('pageA_checkbox1');
+    //   const checkbox2State = localStorage.getItem('pageA_checkbox2');
+    //   document.getElementById('checkbox1').checked = checkbox1State === 'true';
+    //   document.getElementById('checkbox2').checked = checkbox2State === 'true';
+
+    //   // Display history panel
+    //   displayHistoryPanels();
+    // };
+
+    // function displayHistoryPanels() {
+    //   const historyPanels = document.getElementById('historyPanels');
+    //   historyPanels.innerHTML = ''; // Clear previous entries
+
+    //   for (let i = 0; i < localStorage.length; i++) {
+    //     const key = localStorage.key(i);
+    //     if (!key.includes('_checkbox') && key !== 'pageTitle') {
+    //       const title = localStorage.getItem(key);
+    //       const historyEntry = document.createElement('p');
+    //       historyEntry.textContent = title;
+    //       historyEntry.addEventListener('click', function() {
+    //         displayRecord(key);
+    //       });
+    //       historyPanels.appendChild(historyEntry);
+    //     }
+    //   }
+    // }
+
+    // function displayRecord(titleKey) {
+    //   const pageTitle = localStorage.getItem(titleKey);
+    //   const checkbox1State = localStorage.getItem(titleKey + '_checkbox1');
+    //   const checkbox2State = localStorage.getItem(titleKey + '_checkbox2');
+    //   const titleDisplay = document.getElementById('titleDisplay222');
+    //   titleDisplay.textContent = pageTitle;
+
+    //   const checkbox1 = document.getElementById('checkbox1');
+    //   const checkbox2 = document.getElementById('checkbox2');
+
+    //   checkbox1.checked = checkbox1State === 'true';
+    //   checkbox2.checked = checkbox2State === 'true';
+
+    //   checkbox1.addEventListener('change', function() {
+    //     localStorage.setItem(titleKey + '_checkbox1', checkbox1.checked);
+    //     // Dispatch event when checkbox is changed
+    //     const checkboxChangeEvent = new Event('checkboxChange');
+    //     document.dispatchEvent(checkboxChangeEvent);
+    //   });
+
+    //   checkbox2.addEventListener('change', function() {
+    //     localStorage.setItem(titleKey + '_checkbox2', checkbox2.checked);
+    //     // Dispatch event when checkbox is changed
+    //     const checkboxChangeEvent = new Event('checkboxChange');
+    //     document.dispatchEvent(checkboxChangeEvent);
+    //   });
+    // }
+
+    // function checkAndUpdateHistory() {
+    //   const checkbox1 = document.getElementById('checkbox1');
+    //   const checkbox2 = document.getElementById('checkbox2');
+    //   if (checkbox1.checked && checkbox2.checked) {
+    //     // Both checkboxes are checked, remove only the currently displayed title entry from history
+    //     removeDisplayedTitleFromHistory();
+    //   }
+    // }
+
+    // function removeDisplayedTitleFromHistory() {
+    //   const displayedTitle = document.getElementById('titleDisplay222').textContent;
+    //   const displayedKey = 'previousTitle_' + displayedTitle.replace(/\s+/g, '_');
+    //   localStorage.removeItem(displayedKey);
+    //   localStorage.removeItem(displayedKey + '_checkbox1');
+    //   localStorage.removeItem(displayedKey + '_checkbox2');
+    //   displayHistoryPanels(); // Update the history panel after removal
+    // }
+
+
+    
+    //     // WORK ON THIS CODE............................................................................
+
+
+
+
+
+    </script>
+    
+
+    <script src="script.js"></script>
+
+</body>
+</html>
